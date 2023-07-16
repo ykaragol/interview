@@ -1,27 +1,65 @@
-import React, { Component } from 'react';
-//import logo from './logo.svg';
- 
+import React from "react";
+import useRepoSearch from "./data/hooks/use-repo-search";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h2>Welcome to the interview app!</h2>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+const App = () => {
+  const { loading, error, data } = useRepoSearch(
+    {
+      name: "facebook",
+    },
+    {
+      perPage: 10,
+      page: 1,
+    }
+  );
 
-        <ol>
-          <li>Fetch Data from a public API <a href="https://github.com/toddmotto/public-apis">Samples</a></li>
-          <li>Display data from API onto your page (Table, List, etc.)</li>
-          <li>Apply a styling solution of your choice to make your page look different (CSS, SASS, CSS-in-JS)</li> 
-        </ol>   
-       
-        </header>
-      </div>
-    );
-  }
-}
+  const dateTimeFormat = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h2>Welcome to the GitHub Repo Listing app!</h2>
+
+        {loading && <p>Loading...</p>}
+        {error && <p>Error!</p>}
+        {data && (
+          <>
+            <div>{data.total_count} results found.</div>
+            <div>
+              {data.items.map((item: any) => (
+                <div>
+                  {item.name} - {item.description}
+                  {item.html_url}
+                  {item.forks_count}
+                  {item.stargazers_count}
+                  {item.fork}
+                  {item.license.name}
+                  Created At: {dateTimeFormat.format(
+                    Date.parse(item.created_at)
+                  )}
+                  </div>
+              ))}
+            </div>
+          </>
+        )}
+      </header>
+    </div>
+  );
+};
 
 export default App;
+
+          // <div>
+          //   <img src={data.avatar_url} alt="avatar" width="100" height="100" />
+          //   Name: {data.name} <br />
+          //   Login: {data.login} <br />
+          //   Description: {data.description} <br />
+          //   Public Repo Count: {data.public_repos} <br />
+          //   Created At: {dateTimeFormat.format(
+          //     Date.parse(data.created_at)
+          //   )}{" "}
+          //   <br />
+          // </div>
