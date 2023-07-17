@@ -4,9 +4,21 @@ interface ResultPanelParams {
   data: any;
   error: any;
   loading: boolean;
+  onNextPage: () => void;
+  onPrevPage: () => void;
+  currentPage: number;
+  hasNext: boolean;
 }
 
-const ResultPanel = ({ data, error, loading }: ResultPanelParams) => {
+const ResultPanel = ({
+  data,
+  error,
+  loading,
+  onNextPage,
+  onPrevPage,
+  currentPage,
+  hasNext,
+}: ResultPanelParams) => {
   const dateTimeFormat = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -33,6 +45,13 @@ const ResultPanel = ({ data, error, loading }: ResultPanelParams) => {
               </div>
             ))}
           </div>
+          <button onClick={onPrevPage} disabled={currentPage <= 1}>
+            Prev
+          </button>
+          <button onClick={onNextPage} disabled={!hasNext}>
+            Next
+          </button>
+          {currentPage}
         </>
       )}
     </div>

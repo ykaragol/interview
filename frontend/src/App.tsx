@@ -19,13 +19,31 @@ const App = () => {
 
   const onSearch = (query: string) => setQuery(query);
 
+  const hasNext =
+    data && data.total_count > pagination.page * pagination.perPage;
+
+  const onNextPage = () =>
+    hasNext && setPagination({ ...pagination, page: pagination.page + 1 });
+
+  const onPrevPage = () =>
+    pagination.page > 1 &&
+    setPagination({ ...pagination, page: pagination.page - 1 });
+
   return (
     <div className="App">
       <header className="App-header">
         <h2>Welcome to the GitHub Repo Listing app!</h2>
       </header>
       <SearchPanel onSearch={onSearch} searching={loading} />
-      <ResultPanel data={data} loading={loading} error={error} />
+      <ResultPanel
+        data={data}
+        loading={loading}
+        error={error}
+        onNextPage={onNextPage}
+        onPrevPage={onPrevPage}
+        currentPage={pagination.page}
+        hasNext={hasNext}
+      />
     </div>
   );
 };
