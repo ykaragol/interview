@@ -39,7 +39,7 @@ const SearchPanel = ({ onSearch, searching }: SearchPanelParams) => {
         <button
           onClick={handleClick}
           disabled={searching}
-          className="px-4 py-1 text-sm text-slate-50 rounded-full border bg-blue-600 hover:bg-blue-800"
+          className="px-4 py-1 text-sm text-slate-50 rounded-full border bg-blue-600 hover:bg-blue-800 disabled:opacity-75 disabled:cursor-not-allowed"
         >
           Search
         </button>

@@ -17,7 +17,10 @@ const App = () => {
     pagination
   );
 
-  const onSearch = (query: string) => setQuery(query);
+  const onSearch = (query: string) => {
+    setPagination({ ...pagination, page: 1 });
+    setQuery(query);
+  }
 
   const hasNext =
     data && data.total_count > pagination.page * pagination.perPage;
@@ -35,7 +38,7 @@ const App = () => {
         <header>
           <h1 className="text-3xl">Welcome to the GitHub Repo Listing app!</h1>
           <h4 className="text-md pt-2">
-            This application is for searching GitHub repositories of users or
+            This application is for listing GitHub repositories of users or
             organizations
           </h4>
         </header>
