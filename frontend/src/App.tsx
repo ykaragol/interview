@@ -32,7 +32,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Welcome to the GitHub Repo Listing app!</h2>
+        <h2>
+          Welcome to the GitHub Repo Listing app!
+        </h2>
       </header>
       <SearchPanel onSearch={onSearch} searching={loading} />
       <ResultPanel
