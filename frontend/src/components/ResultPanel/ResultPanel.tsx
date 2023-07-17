@@ -29,7 +29,7 @@ const ResultPanel = ({
     <div>
       {loading && <p>Loading...</p>}
       {error && <p>Error!</p>}
-      {data && (
+      {data && data.items && (
         <>
           <div>{data.total_count} results found.</div>
           <div>

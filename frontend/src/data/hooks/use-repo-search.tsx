@@ -23,11 +23,15 @@ export const useRepoSearch = (
     {}
   );
 
-  // Normally we shouldn't have the following hook. But since use-http doesn't support
-  // a parameter like `skip` or `enabled` to control whether the request should be sent or not,
-  // we have to use this workaround.
-  // Eg. @tanstack/react-query has a `enabled` parameter to control this.
-  // But in here, I just wanted to try a different and lightweight library.
+  // Normally we shouldn't have the following hook. But use-http makes the call
+  // in the first render, before the query is set. 
+  // If use-http supported a parameter like `skip` or `enabled` to control 
+  // whether the request should be done or not in the first render, 
+  // we wouldn't have to use this workaround.
+  // In their GH repo, they have some suggestions about this, but not solved.
+  // Eg. @tanstack/react-query has an `enabled` parameter to control this case.
+  // Here, I just wanted to try a different and lightweight library. (My first time using use-http)
+  // But this library is definetely missing this important feature.
   useEffect(
     () => {
       if (name && !loading) {
