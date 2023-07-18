@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, MouseEvent, useState } from "react";
 
 interface SearchPanelParams {
   onSearch: (query: string) => void;
@@ -8,16 +8,17 @@ interface SearchPanelParams {
 const SearchPanel = ({ onSearch, searching }: SearchPanelParams) => {
   const [query, setQuery] = useState("");
 
-  const handleClick = () => {
+  const handleClick = (e: FormEvent | MouseEvent) => {
+    e.preventDefault();
     if (query) {
       onSearch(query);
     }
-    // handle else as validation
+    // TODO handle else as validation
   };
 
   return (
     <div className="border p-4 max-w-md">
-      <div className="grid gap-4 grid-cols-1">
+      <form className="grid gap-4 grid-cols-1" onSubmit={handleClick}>
         <label className="block">
           <span className="block text-sm font-medium text-slate-700">
             Type a user name or organization name
@@ -33,17 +34,19 @@ const SearchPanel = ({ onSearch, searching }: SearchPanelParams) => {
             disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
             invalid:border-pink-500 invalid:text-pink-600
             focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+            autoFocus
           />
         </label>
 
         <button
+          type="submit"
           onClick={handleClick}
           disabled={searching}
           className="px-4 py-1 text-sm text-slate-50 rounded-full border bg-blue-600 hover:bg-blue-800 disabled:opacity-75 disabled:cursor-not-allowed"
         >
           Search
         </button>
-      </div>
+      </form>
     </div>
   );
 };
