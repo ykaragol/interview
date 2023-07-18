@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useRepoSearch from "../../data/hooks/use-repo-search";
-import SearchPanel from "../../components/SearchPanel";
-import ResultPanel from "../../components/ResultPanel";
+import SearchPanel from "./components/SearchPanel";
+import ResultPanel from "./components/ResultPanel";
 
 const RepositoryListing = () => {
   const [query, setQuery] = useState<string | undefined>();
