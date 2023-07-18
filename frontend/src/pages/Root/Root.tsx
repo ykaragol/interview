@@ -4,7 +4,7 @@ import Link from "../../components/Link/Link";
 
 const Root = () => (
   <div className="flex place-content-center">
-    <div className="grow max-w-6xl grid gap-4 grid-cols-1 pt-6">
+    <div className="grow max-w-6xl grid gap-4 grid-cols-1 pt-6 px-4">
       <header className="flex items-center">
         <h1 className="text-3xl font-medium text-slate-700 grow">Welcome to the GitHub Repo Listing app!</h1>
         <Link to="/about">About</Link>
