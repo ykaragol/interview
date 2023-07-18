@@ -1,60 +1,26 @@
-import React, { useState } from "react";
-import useRepoSearch from "./data/hooks/use-repo-search";
-import SearchPanel from "./components/SearchPanel";
-import ResultPanel from "./components/ResultPanel";
+import React from "react";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
 
-const App = () => {
-  const [query, setQuery] = useState<string | undefined>();
-  const [pagination, setPagination] = useState({
-    page: 1,
-    perPage: 9,
-  });
+import Root from "./pages/Root/Root";
+import RepositoryListing from "./pages/RepositoryListing/RepositoryListing";
+import About from "./pages/About/About";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
-  const { loading, error, data } = useRepoSearch(
-    {
-      name: query,
-    },
-    pagination
-  );
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<RepositoryListing />} />
+      <Route path="about" element={<About />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Route>
+  )
+);
 
-  const onSearch = (query: string) => {
-    setPagination({ ...pagination, page: 1 });
-    setQuery(query);
-  }
-
-  const hasNext =
-    data && data.total_count > pagination.page * pagination.perPage;
-
-  const onNextPage = () =>
-    hasNext && setPagination({ ...pagination, page: pagination.page + 1 });
-
-  const onPrevPage = () =>
-    pagination.page > 1 &&
-    setPagination({ ...pagination, page: pagination.page - 1 });
-
-  return (
-    <div className="flex place-content-center">
-      <div className="grow max-w-6xl grid gap-4 grid-cols-1 pt-6">
-        <header>
-          <h1 className="text-3xl">Welcome to the GitHub Repo Listing app!</h1>
-          <h4 className="text-md pt-2">
-            This application is for listing GitHub repositories of users or
-            organizations
-          </h4>
-        </header>
-        <SearchPanel onSearch={onSearch} searching={loading} />
-        <ResultPanel
-          data={data}
-          loading={loading}
-          error={error}
-          onNextPage={onNextPage}
-          onPrevPage={onPrevPage}
-          currentPage={pagination.page}
-          hasNext={hasNext}
-        />
-      </div>
-    </div>
-  );
-};
+const App = () => <RouterProvider router={router} />;
 
 export default App;
