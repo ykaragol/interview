@@ -1,7 +1,7 @@
 import React from "react";
-import ForkIcon from "./ForkIcon";
-import StarIcon from "./StarIcon";
-import WatcherIcon from "./WatcherIcon";
+import ForkIcon from "./Icons/ForkIcon";
+import StarIcon from "./Icons/StarIcon";
+import WatcherIcon from "./Icons/WatcherIcon";
 
 const dateTimeFormat = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
