@@ -1,11 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "../../components/Link/Link";
 
 const About = () => (
   <>
-    <h4 className="text-md font-medium text-slate-700 pt-2">This page is the about page; you'll find some details about the project.</h4>
+    <h4 className="text-md font-medium text-slate-700 pt-2">
+      This page is the about page; you'll find some details about the project.
+    </h4>
     <section className="mt-3 text-sm font-medium text-slate-700">
-      <span>While implementing this project I've touched the following topics:</span>
+      <span>
+        While implementing this project I've touched the following topics:
+      </span>
       <h5 className="mt-2">Project Related Topics</h5>
       <ol className="list-decimal list-inside ">
         <li>Introducing typescript</li>
@@ -22,7 +26,7 @@ const About = () => (
         <li>Upgrading react-scripts to v5.x</li>
       </ol>
     </section>
-    <Link to="/" className="text-md text-blue-600 visited:text-purple-600 ">Go to Query Screen</Link>
+    <Link to="/">Go to Query Screen</Link>
   </>
 );
 
