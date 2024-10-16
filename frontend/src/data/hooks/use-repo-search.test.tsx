@@ -78,4 +78,14 @@ describe("useRepoSearch", () => {
 
     expect(result.current.data).toBe(mockData);
   });
+
+  it("should call the API with correct perPage and page props", async () => {
+    renderHook(() =>
+      useRepoSearch({ name: "test-user" }, { perPage: 20, page: 2 })
+    );
+
+    expect(mockUseFetch().get).toHaveBeenCalledWith(
+      "?q=user:test-user+fork:true&per_page=20&page=2"
+    );
+  });
 });
