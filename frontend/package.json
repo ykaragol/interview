@@ -63,6 +63,7 @@
   },
   "loki": {
     "storiesFilter": "Pages/*",
+    "chromeTolerance": 30,
     "configurations": {
       "large": {
         "target": "chrome.app",
