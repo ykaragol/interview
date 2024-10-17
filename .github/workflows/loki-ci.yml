@@ -11,7 +11,18 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: yarn install --frozen-lockfile
-      - run: yarn build-storybook && yarn loki --requireReference --reactUri file:./storybook-static
+      - name: Setup Google Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: 1181205
+      - name: Set CHROME_PATH environment variable
+        id: set-chrome-path
+        run: |
+          echo chrome-path=$(which chrome) >> $GITHUB_OUTPUT
+      - name: Run Loki
+        run: yarn build-storybook && yarn loki --requireReference --reactUri file:./storybook-static
+        env:
+          CHROME_PATH: ${{ steps.set-chrome-path.outputs.chrome-path }}
       - name: Save Loki current folder
         if: failure()
         uses: actions/upload-artifact@v4
