@@ -20,7 +20,7 @@ jobs:
         run: |
           echo chrome-path=$(which chrome) >> $GITHUB_OUTPUT
       - name: Run Loki
-        run: yarn build-storybook && yarn loki --requireReference --reactUri file:./storybook-static
+        run: yarn build-storybook && yarn loki --requireReference --reactUri file:./storybook-static --diffingEngine looks-same
         env:
           CHROME_PATH: ${{ steps.set-chrome-path.outputs.chrome-path }}
       - name: Save Loki current folder
