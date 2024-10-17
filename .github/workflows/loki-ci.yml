@@ -11,4 +11,18 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: yarn install --frozen-lockfile
-      - run: yarn build-storybook && yarn loki --requireReference --reactUri file:./storybook-static 
+      - run: yarn build-storybook && yarn loki --requireReference --reactUri file:./storybook-static
+      - name: Save Loki current folder
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-${{ github.run_id }}
+          path: ./frontend/.loki/current
+          retention-days: 1
+      - name: Save Loki difference folder
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: difference-${{ github.run_id }}
+          path: ./frontend/.loki/difference
+          retention-days: 1
