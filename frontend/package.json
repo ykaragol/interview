@@ -12,6 +12,7 @@
     "react-router": "6",
     "react-router-dom": "6",
     "react-scripts": "^5.0.1",
+    "start-server-and-test": "^2.0.8",
     "typescript": "^5.1.6",
     "use-http": "^1.0.28"
   },
@@ -21,8 +22,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook-run": "storybook dev -p 6006",
+    "storybook-run-ci": "storybook dev -p 6006 --ci",
+    "loki-test": "loki --port=6006 --requireReference",
+    "loki-test-ci": "start-server-and-test storybook-run-ci 6006 loki-test",
+    "storybook-build": "storybook build"
   },
   "eslintConfig": {
     "extends": [
