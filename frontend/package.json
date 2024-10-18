@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "storybook-run": "storybook dev -p 6006",
     "storybook-run-ci": "storybook dev -p 6006 --ci",
-    "loki-test": "loki --port=6006 --requireReference",
+    "loki-test": "loki --port=6006 --requireReference --chromeFlags='--hide-scrollbars --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-agent=loki --user-data-dir=/data' --chromeConcurrency=4 --chromeRetries=10 --verboseRenderer",
     "loki-test-ci": "start-server-and-test storybook-run-ci 6006 loki-test",
     "storybook-build": "storybook build"
   },
