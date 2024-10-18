@@ -1,0 +1,37 @@
+name: Loki CI
+run-name: Loki CI for Frontend
+on: [push]
+jobs:
+  Run-Loki-CI:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: yarn install --frozen-lockfile
+      - name: Setup Google Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: 1181205
+          install-dependencies: true
+      - name: Run Loki
+        run: yarn loki-test-ci
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+      - name: Save Loki current folder
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-${{ github.run_id }}
+          path: ./frontend/.loki/current
+          retention-days: 1
+      - name: Save Loki difference folder
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: difference-${{ github.run_id }}
+          path: ./frontend/.loki/difference
+          retention-days: 1

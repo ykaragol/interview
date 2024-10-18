@@ -3,23 +3,90 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-scripts": "2.1.3"
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.2",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "6",
+    "react-router-dom": "6",
+    "react-scripts": "^5.0.1",
+    "start-server-and-test": "^2.0.8",
+    "typescript": "^5.1.6",
+    "use-http": "^1.0.28"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook-run": "storybook dev -p 6006",
+    "storybook-run-ci": "storybook dev -p 6006 --ci",
+    "loki-test": "loki --port=6006 --requireReference --chromeFlags='--hide-scrollbars --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --user-agent=loki --user-data-dir=/data' --chromeConcurrency=4 --chromeRetries=10 --verboseRenderer",
+    "loki-test-ci": "start-server-and-test storybook-run-ci 6006 loki-test",
+    "storybook-build": "storybook build"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:react-hooks/recommended",
+      "plugin:storybook/recommended"
+    ]
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@storybook/addon-essentials": "7.6.20",
+    "@storybook/addon-interactions": "7.6.20",
+    "@storybook/addon-links": "7.6.20",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "7.6.20",
+    "@storybook/preset-create-react-app": "7.6.20",
+    "@storybook/react": "7.6.20",
+    "@storybook/react-webpack5": "7.6.20",
+    "@storybook/test": "7.6.20",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/babel__core": "^7.20.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.9.0",
+    "loki": "^0.35.1",
+    "prop-types": "^15.8.1",
+    "storybook": "7.6.20",
+    "tailwindcss": "^3.3.3",
+    "webpack": "^5.95.0"
+  },
+  "loki": {
+    "storiesFilter": "Pages/*",
+    "chromeTolerance": 30,
+    "configurations": {
+      "large": {
+        "target": "chrome.app",
+        "width": 1400,
+        "height": 800,
+        "deviceScaleFactor": 1
+      },
+      "medium": {
+        "target": "chrome.app",
+        "width": 1200,
+        "height": 768,
+        "deviceScaleFactor": 1
+      },
+      "small": {
+        "target": "chrome.app",
+        "width": 480,
+        "height": 800,
+        "deviceScaleFactor": 1
+      }
+    }
+  }
 }
