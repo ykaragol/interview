@@ -73,19 +73,18 @@
         "target": "chrome.app",
         "width": 1400,
         "height": 800,
-        "deviceScaleFactor": 1,
-        "mobile": false
+        "deviceScaleFactor": 1
       },
       "medium": {
         "target": "chrome.app",
         "width": 1200,
         "height": 768,
-        "deviceScaleFactor": 1,
-        "mobile": false
+        "deviceScaleFactor": 1
       },
       "small": {
         "target": "chrome.app",
-        "preset": "iPhone 7",
+        "width": 480,
+        "height": 800,
         "deviceScaleFactor": 1
       }
     }
