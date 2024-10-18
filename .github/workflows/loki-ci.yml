@@ -12,17 +12,15 @@ jobs:
         uses: actions/checkout@v4
       - run: yarn install --frozen-lockfile
       - name: Setup Google Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: 1181205
-      - name: Set CHROME_PATH environment variable
-        id: set-chrome-path
-        run: |
-          echo chrome-path=$(which chrome) >> $GITHUB_OUTPUT
+          install-dependencies: true
       - name: Run Loki
         run: yarn loki-test-ci
         env:
-          CHROME_PATH: ${{ steps.set-chrome-path.outputs.chrome-path }}
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
       - name: Save Loki current folder
         if: failure()
         uses: actions/upload-artifact@v4
